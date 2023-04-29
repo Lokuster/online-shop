@@ -8,7 +8,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: varchar
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
@@ -31,7 +31,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: balance
-                  type: decimal
+                  type: double
                   constraints:
                     nullable: false
               - column:

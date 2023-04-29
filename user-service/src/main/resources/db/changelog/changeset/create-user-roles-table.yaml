@@ -8,15 +8,13 @@ databaseChangeLog:
             columns:
               - column:
                   name: user_id
-                  type: varchar(50)
+                  type: bigint
                   constraints:
-                    primaryKey: true
                     foreignKeyName: fk_user_roles_user
                     references: users(id)
               - column:
                   name: role_id
-                  type: varchar(50)
+                  type: bigint
                   constraints:
-                    primaryKey: true
                     foreignKeyName: fk_user_roles_role
                     references: roles(id)

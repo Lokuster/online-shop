@@ -2,6 +2,11 @@ server:
   port: 0
 
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/realms/online-shop-realm
   liquibase:
     enabled: true
   application:
@@ -10,7 +15,7 @@ spring:
     show-sql: true
     hibernate:
       format_sql: true
-      ddl-auto: none
+      ddl-auto: validate
   datasource:
     driverClassName: org.postgresql.Driver
     password: postgres
