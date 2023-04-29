@@ -28,7 +28,7 @@ public class UserAdapter extends AbstractUserAdapterFederatedStorage {
     public UserAdapter(KeycloakSession session, RealmModel realm, ComponentModel model, User user) {
         super(session, realm, model);
         this.user = user;
-        keycloakId = StorageId.keycloakId(model, user.getId());
+        keycloakId = StorageId.keycloakId(model, String.valueOf(user.getId()));
     }
 
     @Override
@@ -126,10 +126,10 @@ public class UserAdapter extends AbstractUserAdapterFederatedStorage {
         Map<String, List<String>> attrs = super.getAttributes();
         MultivaluedHashMap<String, String> all = new MultivaluedHashMap<>();
         all.putAll(attrs);
-        all.add("username", user.getUsername());
-        all.add("email", user.getEmail());
-        all.add("balance", String.valueOf(user.getBalance()));
-        all.add("active", String.valueOf(user.getActive()));
+        all.add(USERNAME_ATTRIBUTE, user.getUsername());
+        all.add(EMAIL_ATTRIBUTE, user.getEmail());
+        all.add(BALANCE_ATTRIBUTE, String.valueOf(user.getBalance()));
+        all.add(ACTIVE_ATTRIBUTE, String.valueOf(user.getActive()));
         return all;
     }
 

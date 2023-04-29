@@ -33,7 +33,7 @@ public class RoleAdapter implements RoleModel {
 
     @Override
     public String getId() {
-        return this.role.getId();
+        return String.valueOf(this.role.getId());
     }
 
     @Override
