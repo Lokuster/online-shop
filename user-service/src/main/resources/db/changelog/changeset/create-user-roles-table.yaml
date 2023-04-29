@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      author: Lokuster
+      id: create-user-roles-table
+      changes:
+        - createTable:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  type: varchar(50)
+                  constraints:
+                    primaryKey: true
+                    foreignKeyName: fk_user_roles_user
+                    references: users(id)
+              - column:
+                  name: role_id
+                  type: varchar(50)
+                  constraints:
+                    primaryKey: true
+                    foreignKeyName: fk_user_roles_role
+                    references: roles(id)
