@@ -66,7 +66,7 @@ public class UserStorageProvider implements
         if (!supportsCredentialType(credentialInput.getType())) {
             return false;
         }
-        String persistenceId = StorageId.externalId(user.getId());
+        Long persistenceId = Long.valueOf(StorageId.externalId(user.getId()));
         String userPassword = entityManager
                 .createNamedQuery("getUserPasswordById", String.class)
                 .setParameter("id", persistenceId)
@@ -77,7 +77,7 @@ public class UserStorageProvider implements
     @Override
     public UserModel getUserById(RealmModel realm, String id) {
         log.info("getUserById: " + id);
-        String persistenceId = StorageId.externalId(id);
+        Long persistenceId = Long.valueOf(StorageId.externalId(id));
         User entity = entityManager.find(User.class, persistenceId);
         if (entity == null) {
             return null;
