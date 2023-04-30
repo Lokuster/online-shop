@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +16,7 @@ import java.util.Set;
 @Setter
 @Table(name = "users")
 @Entity
-public class User {
+public class User implements HasId {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,11 +40,10 @@ public class User {
     @Column(name = "balance", nullable = false)
     private Double balance;
 
-    @Column(name = "active", columnDefinition = "bool default true")
+    @Column(name = "active")
     private Boolean active;
 
-    @Column(name = "created", nullable = false, columnDefinition = "timestamp default now()", updatable = false)
-    @NotNull
+    @Column(name = "created", nullable = false, updatable = false)
     private Date createDate;
 
     @ManyToMany(fetch = FetchType.EAGER)
