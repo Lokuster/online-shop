@@ -5,8 +5,11 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -35,6 +38,7 @@ public class User implements HasId {
     @Column(name = "password", nullable = false)
     @NotBlank
     @JsonIgnore
+    @Setter(AccessLevel.NONE)
     private String password;
 
     @Column(name = "balance", nullable = false)
@@ -53,4 +57,11 @@ public class User implements HasId {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
+
+    public void setPassword(String password) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if (!password.startsWith("$2a$")) {
+            this.password = passwordEncoder.encode(password);
+        }
+    }
 }
